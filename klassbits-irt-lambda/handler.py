@@ -140,8 +140,8 @@ def select_question_from_fisher_information(event, context):
     body = {
         "message": "Success",
         "questionID": q_ids[item_index],
-        "itemIndex": item_index,
-        "maxFisherInformation": np.max(items_info)
+        "itemIndex": int(item_index),
+        "maxFisherInformation": float(np.max(items_info))
     }
 
     response = {
