@@ -40,10 +40,10 @@ def get_next_trait_estimate(event, context):
     # Input validation
     if not ('responsePattern' in event  and 'previousLatentTraitEstimate' in event \
         and isinstance(event['responsePattern'], list) and len(event['responsePattern']) > 0 \
-        and isinstance(event['previousLatentTraitEstimate'], float) ):
+        and (isinstance(event['previousLatentTraitEstimate'], float) or isinstance(event['previousLatentTraitEstimate'], int))):
         return {
             "statusCode": 500,
-            "body": "Malformed Input. Requires responsePattern as [Response]! and previousLatentTraitEstimate as Float"
+            "body": "Malformed Input. Requires responsePattern as [Response]! and previousLatentTraitEstimate as Float or Int"
         }
 
     # 1. Read the Input Parameters
@@ -112,10 +112,10 @@ def select_question_from_fisher_information(event, context):
     # Input validation
     if not ('questionList' in event  and 'latentTraitEstimate' in event \
         and isinstance(event['questionList'], list) and len(event['questionList']) > 0 \
-        and isinstance(event['latentTraitEstimate'], float) ):
+        and (isinstance(event['latentTraitEstimate'], float) or isinstance(event['latentTraitEstimate'], int))):
         return {
             "statusCode": 500,
-            "body": "Malformed Input. Requires questionList as [Question]! and latentTraitEstimate as Float"
+            "body": "Malformed Input. Requires questionList as [Question]! and latentTraitEstimate as Float or Int"
         }
 
     # Use Seed from OS unpredictable entropy https://numpy.org/doc/stable/reference/random/generator.html

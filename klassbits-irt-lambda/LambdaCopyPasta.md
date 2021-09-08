@@ -22,6 +22,15 @@ Event Object
 }
 ```
 
+Response Object
+
+```typescript
+{
+  "statusCode": 200,
+  "body": "{\"message\": \"Success\", \"questionID\": \"krmsodkA01k2\", \"itemIndex\": 1, \"maxFisherInformation\": 0.23297564953321948}"
+}
+```
+
 # getNextTraitEstimate
 
 Event Object 
