@@ -1,3 +1,14 @@
+# Docker to use:
+docker run -it -d --name klass-bits-python -p 12000:6006 -p 12001:6007 -v $(pwd):/workdir -w /workdir python:3.9
+
+# Steps to deploy
+1. Install SLS with `curl -o- -L https://slss.io/install | bash`
+2. Make venv
+3. Install requirements with pip install -r requirements.txt
+4. sls plugin install -n serverless-python-requirements
+5. sls deploy
+
+
 # Steps to Package Python Dependencies
 
 1. `sls plugin install -n serverless-python-requirements` This will automatically add package.json and append line to serverless.yml
