@@ -8,6 +8,7 @@ from scipy.optimize import newton
 
 MIN_Q_COUNT = 15
 Q_START = 5 # The number of questions before starting optimize more than 1 iter
+STANDARD_ERROR_THRESHOLD = 0.375
 
 def get_next_trait_estimate(event, context):
     """Given a list of response pattern, calculate the next trait estimate. 
@@ -75,7 +76,7 @@ def get_next_trait_estimate(event, context):
         "standardError": std_err,
         "noIter": res[1].iterations,
         "isConverged": res[1].converged,
-        "isEnd": bool(q_count >= MIN_Q_COUNT and std_err <= 0.3)
+        "isEnd": bool(q_count >= MIN_Q_COUNT and std_err <= STANDARD_ERROR_THRESHOLD)
     }
 
     response = {
