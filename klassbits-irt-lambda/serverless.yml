@@ -27,7 +27,7 @@ provider:
   lambdaHashingVersion: 20201221
 
 # you can overwrite defaults here
-  stage: dev
+  stage: prod
   region: ap-southeast-1
 
 # you can add statements to the Lambda function's IAM Role here
