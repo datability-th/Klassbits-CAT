@@ -9,6 +9,7 @@ from scipy.optimize import newton
 MIN_Q_COUNT = 15
 Q_START = 5 # The number of questions before starting optimize more than 1 iter
 STANDARD_ERROR_THRESHOLD = 0.375
+STANDARD_ERROR_A = 1
 
 def get_next_trait_estimate(event, context):
     """Given a list of response pattern, calculate the next trait estimate. 
@@ -64,7 +65,8 @@ def get_next_trait_estimate(event, context):
     ddf = get_dd_log_likelihood_f(a_list, b_list, u_list)
     # Make maxiter max(q_count - 10, 1) to not get into diverging issues in the beginning 
     res = newton(df, t, fprime=ddf, full_output=True, tol=1e-03, maxiter= max(q_count - Q_START, 1), disp=False)
-    std_err = np.sqrt(1/np.sum(fisher_information(a_list,b_list,t)))
+    std_err_modifier = 1/( 1+ STANDARD_ERROR_A * (min(0, 2 - t)**2 + min(0, 2 + t)**2 ))
+    std_err = np.sqrt(1/np.sum(fisher_information(a_list,b_list,t))) * std_err_modifier
     t = np.clip(res[0], -4, 4)
     
     # Need to convert bool_ (numpy) to bool Else it cant be serialized!
